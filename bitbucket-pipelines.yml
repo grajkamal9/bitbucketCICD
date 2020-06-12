@@ -1,8 +1,8 @@
 image: atlassian/default-image:latest
 
 pipelines:
-  branches:
-    staging:
+  branches: 
+    staging: #branch name change accordingly
       - step:
           deployment: staging
           script:
