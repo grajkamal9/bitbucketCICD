@@ -1,0 +1,26 @@
+image: atlassian/default-image:latest
+
+pipelines:
+  branches:
+    staging:
+      - step:
+          deployment: staging
+          script:
+            - ssh -tt rgaddam@127.0.0.0 -p 8899 << EOF # change the ssh according to  your VM
+            - cd public
+            - chmod 777 deploy.sh
+            - ./deploy.sh
+            - exit $?
+            - EOF
+            - echo "Deploy step finished"
+  custom: # Pipelines that can only be triggered manually
+    production:
+      - step:
+          script:
+            - ssh -tt rgaddam@127.0.0.0 -p 8899 << EOF # change the ssh according to  your VM
+            - cd public
+            - ./deploy.sh
+            - chmod 777 deploy.sh
+            - exit $?
+            - EOF
+            - echo "Deploy step finished"
